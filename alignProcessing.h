@@ -34,6 +34,8 @@ public:
 
     pcl::ModelCoefficients::Ptr getPlaneUsed();
 
+    PointCloudIntT::Ptr getSceneMap();
+
     void visualize();
 
 private:

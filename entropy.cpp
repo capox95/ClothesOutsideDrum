@@ -48,11 +48,16 @@ bool EntropyFilter::compute(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud_out)
     getSpherical(m_mls_normals, m_spherical);
 
     // depth interval estimation
-    if (_flag_vertices == true)
+    if (_flag_vertices == true && _flag_plane_ref == false)
     {
         pcl::PointCloud<pcl::PointXYZ>::Ptr vertices(new pcl::PointCloud<pcl::PointXYZ>);
         vertices = m_top_vertices;
         computePlaneBottomBin(m_mls_cloud, vertices, m_plane);
+    }
+    else if (_flag_vertices == false && _flag_plane_ref == true)
+    {
+        std::cout << "Plane Reference already available" << std::endl;
+        m_plane = m_plane_ref;
     }
     else
     {
@@ -70,7 +75,7 @@ bool EntropyFilter::compute(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud_out)
 
     combineConvexityAndCurvatureInfo(m_cloud_convexity, m_mls_normals, m_cloud_combined);
 
-    local_search(m_mls_cloud, m_spherical, m_cloud_combined);
+    local_search(m_mls_cloud, m_spherical, m_cloud_combined, m_cloud_depth);
     normalizeEntropy(m_spherical);
 
     if (_max_entropy < 1.0)
@@ -372,7 +377,8 @@ void EntropyFilter::histogram2D(pcl::PointCloud<Spherical>::Ptr &spherical, int 
 
 // LOCAL SEARCH
 void EntropyFilter::local_search(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud, pcl::PointCloud<Spherical>::Ptr &spherical,
-                                 pcl::PointCloud<pcl::PointXYZI>::Ptr &cloud_combined)
+                                 pcl::PointCloud<pcl::PointXYZI>::Ptr &cloud_combined,
+                                 pcl::PointCloud<pcl::PointXYZI>::Ptr &cloud_depth)
 {
     pcl::KdTreeFLANN<pcl::PointXYZ> kdtree;
     kdtree.setInputCloud(cloud);
@@ -396,6 +402,8 @@ void EntropyFilter::local_search(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud, pcl
             {
                 histogram2D(spherical, it, pointIdxNKNSearch);
             }
+            if (_flag_weight)
+                spherical->points[it].entropy = -spherical->points[it].entropy * cloud_depth->points[it].intensity * 100;
         }
         else
         {
@@ -721,4 +729,10 @@ void EntropyFilter::computePlaneBottomBin(pcl::PointCloud<pcl::PointXYZ>::Ptr &c
 
     seg.setInputCloud(bottom_vertices);
     seg.segment(*inliers, *plane);
+}
+
+void EntropyFilter::setReferencePlane(pcl::ModelCoefficients::Ptr &plane)
+{
+    m_plane_ref = plane;
+    _flag_plane_ref = true;
 }

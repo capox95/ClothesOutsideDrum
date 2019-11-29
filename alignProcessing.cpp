@@ -6,6 +6,8 @@ void Processing::setObjectCloud(PointCloudT::Ptr object) { object_result_ = obje
 
 pcl::ModelCoefficients::Ptr Processing::getPlaneUsed() { return plane_; }
 
+PointCloudIntT::Ptr Processing::getSceneMap() { return scene_map_; }
+
 void Processing::getPointPlaneDistanceCloud(PointCloudT::Ptr &obj, PointCloudT::Ptr &scene, PointCloudT::Ptr scene_proj,
                                             PointCloudIntT::Ptr &cloud_out, pcl::ModelCoefficients::Ptr &plane)
 {

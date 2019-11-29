@@ -74,6 +74,8 @@ int main(int argc, char **argv)
     ef.setCurvatureThreshold(0.01);      // Curvature Threshold for the computation of Entropy
     ef.setDepthThreshold(0.03);          // if the segment region has a value of depth lower than this -> not graspable (value in meters)
     ef.setAngleThresholdForConvexity(5); // convexity check performed if the angle btw two normal vectors is larger than this
+    ef.setReferencePlane(plane_proc);
+    ef.useWeightedEntropy(true);
 
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_result(new pcl::PointCloud<pcl::PointXYZ>);
     ef.compute(cloud_result);

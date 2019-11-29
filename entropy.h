@@ -19,12 +19,12 @@ private:
     pcl::PointCloud<pcl::Normal>::Ptr m_mls_normals;
     pcl::PointCloud<Spherical>::Ptr m_spherical;
 
-    pcl::ModelCoefficients::Ptr m_plane, m_plane_top;
+    pcl::ModelCoefficients::Ptr m_plane, m_plane_top, m_plane_ref;
 
     float m_leafsize, m_entropy_threshold, m_curvature_threshold,
         m_depth_interval, m_depth_threshold, m_angle_threshold, _max_entropy;
     int m_KNN;
-    bool _flag_vertices;
+    bool _flag_vertices, _flag_plane_ref, _flag_weight;
 
 public:
     EntropyFilter() : m_source(new pcl::PointCloud<pcl::PointXYZRGB>),
@@ -43,7 +43,12 @@ public:
 
     {
         _flag_vertices = false;
+        _flag_plane_ref = false;
+        _flag_weight = false;
     }
+    void useWeightedEntropy(bool flag) { _flag_weight = flag; }
+
+    void setReferencePlane(pcl::ModelCoefficients::Ptr &plane);
 
     void setInputCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud_in);
 
@@ -104,7 +109,8 @@ private:
 
     // LOCAL SEARCH
     void local_search(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud, pcl::PointCloud<Spherical>::Ptr &spherical,
-                      pcl::PointCloud<pcl::PointXYZI>::Ptr &cloud_combined);
+                      pcl::PointCloud<pcl::PointXYZI>::Ptr &cloud_combined,
+                      pcl::PointCloud<pcl::PointXYZI>::Ptr &cloud_depth);
 
     void segmentCloudEntropy(pcl::PointCloud<pcl::PointNormal> &cloud, pcl::PointCloud<Spherical>::Ptr &spherical,
                              pcl::PointCloud<pcl::PointXYZ>::Ptr &output, float thresholdEntropy);
