@@ -485,6 +485,9 @@ float EntropyFilter::getPointPlaneDistanceCloud(pcl::PointCloud<pcl::PointXYZ>::
             x0 = cloud->points[i].getVector3fMap();
             distance = n.dot(x0) + p;
 
+            if (distance > 0)
+                distance = 0;
+
             cloud_out->points[i].x = cloud->points[i].x;
             cloud_out->points[i].y = cloud->points[i].y;
             cloud_out->points[i].z = cloud->points[i].z;
@@ -494,16 +497,16 @@ float EntropyFilter::getPointPlaneDistanceCloud(pcl::PointCloud<pcl::PointXYZ>::
         }
     }
 
-    float max_depth = *std::max_element(v_distances.begin(), v_distances.end());
+    //float max_depth = *std::max_element(v_distances.begin(), v_distances.end());
     float min_depth = *std::min_element(v_distances.begin(), v_distances.end());
 
-    float depth_interval;
-    if (min_depth < 0)
-        depth_interval = max_depth - min_depth;
-    else
-        depth_interval = max_depth + min_depth;
+    float depth_interval = fabs(min_depth);
+    //if (min_depth < 0)
+    //    depth_interval = max_depth - min_depth;
+    //else
+    //    depth_interval = max_depth + min_depth;
 
-    std::cout << "max and min depth values: " << max_depth << ", " << min_depth << std::endl;
+    //std::cout << "max and min depth values: " << max_depth << ", " << min_depth << std::endl;
     std::cout << "depth interval: " << depth_interval << std::endl;
     return depth_interval;
 }

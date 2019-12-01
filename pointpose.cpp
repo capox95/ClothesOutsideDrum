@@ -31,7 +31,7 @@ Eigen::Vector3f PointPose::getDirectionWrinkle()
     return value;
 }
 
-bool PointPose::computeGraspPoint(Eigen::Affine3d &transformation_matrix)
+bool PointPose::computeGraspPoint(Eigen::Affine3d &transformation_matrix, float &margin)
 {
 
     // Create the filtering object
@@ -66,6 +66,17 @@ bool PointPose::computeGraspPoint(Eigen::Affine3d &transformation_matrix)
     getCoordinateFrame(m_trans, rotation);
 
     transformation_matrix = computeTransformation();
+
+    // compute margin for the grasp wrt plane
+    Eigen::Vector3f n(m_plane->values[0], m_plane->values[1], m_plane->values[2]);
+    float p = m_plane->values[3];
+    float distance = n.dot(m_trans) + p;
+
+    if (distance < 0)
+        distance = -distance;
+
+    std::cout << "margin for grasp: " << distance * 100 << " cm" << std::endl;
+
     return true;
 }
 void PointPose::visualizeGrasp()

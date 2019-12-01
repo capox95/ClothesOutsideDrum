@@ -58,6 +58,7 @@
         "typeinfo": "cpp",
         "valarray": "cpp",
         "random": "cpp",
-        "core": "cpp"
+        "core": "cpp",
+        "iterator": "cpp"
     }
 }

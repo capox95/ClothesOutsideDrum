@@ -88,7 +88,8 @@ int main(int argc, char **argv)
     pp.setRefPlane(plane_proc);
     pp.setInputCloud(cloud_result);
     Eigen::Affine3d transformation;
-    pp.computeGraspPoint(transformation);
+    float margin;
+    pp.computeGraspPoint(transformation, margin);
 
     //viz.spin();
     //ft.visualize();

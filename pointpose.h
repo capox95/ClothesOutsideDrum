@@ -39,7 +39,7 @@ public:
 
     Eigen::Vector3f getDirectionWrinkle();
 
-    bool computeGraspPoint(Eigen::Affine3d &transformation_matrix);
+    bool computeGraspPoint(Eigen::Affine3d &transformation_matrix, float &margin);
 
     void visualizeGrasp();
 
