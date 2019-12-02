@@ -53,31 +53,27 @@ public:
 
     void setReferencePlane(pcl::ModelCoefficients::Ptr &plane);
 
-    void setInputCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud_in);
+    void setInputCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud_in) { m_source = cloud_in; };
 
-    void setDownsampleLeafSize(float leaf_size);
+    void setDownsampleLeafSize(float leaf_size) { m_leafsize = leaf_size; };
 
-    void setEntropyThreshold(float entropy_th);
+    void setEntropyThreshold(float entropy_th) { m_entropy_threshold = entropy_th; };
 
-    void setKLocalSearch(int K);
+    void setKLocalSearch(int K) { m_KNN = K; };
 
-    void setCurvatureThreshold(float curvature_th);
+    void setCurvatureThreshold(float curvature_th) { m_curvature_threshold = curvature_th; };
 
-    void setDepthThreshold(float depth_th);
+    void setDepthThreshold(float depth_th) { m_depth_threshold = depth_th; };
 
-    void setAngleThresholdForConvexity(float angle_th);
+    void setAngleThresholdForConvexity(float angle_th) { m_angle_threshold = angle_th; };
 
     void setVerticesBinContour(pcl::PointCloud<pcl::PointXYZ>::Ptr vertices);
-
-    pcl::PointCloud<pcl::PointXYZ>::Ptr getMLSCloud();
-
-    pcl::PointCloud<pcl::Normal>::Ptr getMLSNormals();
 
     pcl::ModelCoefficients::Ptr getReferencePlane();
 
     bool compute(std::vector<pcl::PointCloud<pcl::PointXYZ>::Ptr> &clouds_out);
 
-    //
+    // ---------------------------------------------------------------------------------
     //ColorMap functions
     void colorMapEntropy(pcl::PointCloud<pcl::PointXYZI>::Ptr &cloud_map);
 
@@ -87,11 +83,12 @@ public:
 
     void colorMapAzimuth(pcl::PointCloud<pcl::PointXYZI>::Ptr &cloud_map);
 
+    //Visualization function
     void visualizeAll(bool flag);
 
 private:
-    void downsample(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud_in, float leaf_size,
-                    pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud_out);
+    void downsample(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud_in,
+                    float leaf_size, pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud_out);
 
     void computePolyFitting(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud, pcl::PointCloud<pcl::PointNormal> &mls_points);
 

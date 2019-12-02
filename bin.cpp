@@ -2,6 +2,7 @@
 #include <pcl/io/pcd_io.h>
 #include <pcl/visualization/cloud_viewer.h>
 #include <pcl/console/print.h>
+#include <pcl/console/print.h>
 
 #include <chrono>
 #include <ctime>
@@ -24,8 +25,9 @@ int main(int argc, char **argv)
 
     //time computation
     auto start = std::chrono::steady_clock::now();
-    //BIN SEGMENTATION -----------------------------------------------------------------------
 
+    pcl::console::print_highlight("BinSegmentation...\n");
+    //BIN SEGMENTATION -----------------------------------------------------------------------
     BinSegmentation bin;
     bin.setInputCloud(source);
     bin.setNumberLines(4);
@@ -49,7 +51,6 @@ int main(int argc, char **argv)
     auto startE = std::chrono::steady_clock::now();
 
     pcl::console::print_highlight("EntropyFilter...\n");
-
     // ENTROPY FILTER -----------------------------------------------------------------------
     //
     EntropyFilter ef;
@@ -72,7 +73,6 @@ int main(int argc, char **argv)
     pcl::ModelCoefficients::Ptr plane_ef = ef.getReferencePlane();
 
     pcl::console::print_highlight("PointPose...\n");
-
     // GRASP POINT --------------------------------------------------------------------------
     PointPose pp;
     pp.setSourceCloud(source);
@@ -94,7 +94,6 @@ int main(int argc, char **argv)
     std::cout << "overall processing took: " << std::chrono::duration<double, std::milli>(diffAll).count() << " ms" << std::endl;
 
     bin.visualize(false, true, false);
-    //pp.visualizeGrasp();
     pp.visualizeCloudGrasp(cloud_grasp);
     ef.visualizeAll(false);
 

@@ -15,29 +15,11 @@
 
 #include "entropyOut.h"
 
-void EntropyFilter::setInputCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud_in) { m_source = cloud_in; }
-
-void EntropyFilter::setDownsampleLeafSize(float leaf_size) { m_leafsize = leaf_size; }
-
-void EntropyFilter::setEntropyThreshold(float entropy_th) { m_entropy_threshold = entropy_th; }
-
-void EntropyFilter::setKLocalSearch(int K) { m_KNN = K; }
-
-void EntropyFilter::setCurvatureThreshold(float curvature_th) { m_curvature_threshold = curvature_th; }
-
-void EntropyFilter::setDepthThreshold(float depth_th) { m_depth_threshold = depth_th; };
-
-void EntropyFilter::setAngleThresholdForConvexity(float angle_th) { m_angle_threshold = angle_th; }
-
 void EntropyFilter::setVerticesBinContour(pcl::PointCloud<pcl::PointXYZ>::Ptr vertices)
 {
     m_top_vertices = vertices;
     _flag_vertices = true;
 }
-
-pcl::PointCloud<pcl::PointXYZ>::Ptr EntropyFilter::getMLSCloud() { return m_mls_cloud; }
-
-pcl::PointCloud<pcl::Normal>::Ptr EntropyFilter::getMLSNormals() { return m_mls_normals; }
 
 pcl::ModelCoefficients::Ptr EntropyFilter::getReferencePlane() { return m_plane; }
 
@@ -98,7 +80,7 @@ bool EntropyFilter::compute(std::vector<pcl::PointCloud<pcl::PointXYZ>::Ptr> &cl
     return true;
 }
 
-//
+// -----------------------------------------------------------------------------------------------------------------------
 //ColorMap functions
 void EntropyFilter::colorMapEntropy(pcl::PointCloud<pcl::PointXYZI>::Ptr &cloud_map)
 {
@@ -227,6 +209,8 @@ void EntropyFilter::visualizeAll(bool flag)
         vizC.spinOnce();
     }
 }
+// -----------------------------------------------------------------------------------------------------------------------
+
 
 void EntropyFilter::downsample(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud_in, float leaf_size,
                                pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud_out)
