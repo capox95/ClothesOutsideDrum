@@ -1,4 +1,5 @@
-/home/alessio/dev/Clothes_Outside/build/CMakeFiles/rebuild_cache.dir
 /home/alessio/dev/Clothes_Outside/build/CMakeFiles/edit_cache.dir
-/home/alessio/dev/Clothes_Outside/build/CMakeFiles/Align.dir
 /home/alessio/dev/Clothes_Outside/build/CMakeFiles/Model.dir
+/home/alessio/dev/Clothes_Outside/build/CMakeFiles/rebuild_cache.dir
+/home/alessio/dev/Clothes_Outside/build/CMakeFiles/WashingMachine.dir
+/home/alessio/dev/Clothes_Outside/build/CMakeFiles/Bin.dir

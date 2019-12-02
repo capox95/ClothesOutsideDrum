@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/alessio/dev/Clothes_Outside/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
@@ -77,6 +66,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,19 +111,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Align
-
-# Build rule for target.
-Align: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Align
-.PHONY : Align
-
-# fast build rule for target.
-Align/fast:
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/build
-.PHONY : Align/fast
-
-#=============================================================================
 # Target rules for targets named Model
 
 # Build rule for target.
@@ -136,86 +123,142 @@ Model/fast:
 	$(MAKE) -f CMakeFiles/Model.dir/build.make CMakeFiles/Model.dir/build
 .PHONY : Model/fast
 
-align.o: align.cpp.o
+#=============================================================================
+# Target rules for targets named WashingMachine
 
-.PHONY : align.o
+# Build rule for target.
+WashingMachine: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 WashingMachine
+.PHONY : WashingMachine
 
-# target to build an object file
-align.cpp.o:
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/align.cpp.o
-.PHONY : align.cpp.o
+# fast build rule for target.
+WashingMachine/fast:
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/build
+.PHONY : WashingMachine/fast
 
-align.i: align.cpp.i
+#=============================================================================
+# Target rules for targets named Bin
 
-.PHONY : align.i
+# Build rule for target.
+Bin: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Bin
+.PHONY : Bin
 
-# target to preprocess a source file
-align.cpp.i:
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/align.cpp.i
-.PHONY : align.cpp.i
+# fast build rule for target.
+Bin/fast:
+	$(MAKE) -f CMakeFiles/Bin.dir/build.make CMakeFiles/Bin.dir/build
+.PHONY : Bin/fast
 
-align.s: align.cpp.s
+alignTarget.o: alignTarget.cpp.o
 
-.PHONY : align.s
-
-# target to generate assembly for a file
-align.cpp.s:
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/align.cpp.s
-.PHONY : align.cpp.s
-
-alignProcessing.o: alignProcessing.cpp.o
-
-.PHONY : alignProcessing.o
-
-# target to build an object file
-alignProcessing.cpp.o:
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/alignProcessing.cpp.o
-.PHONY : alignProcessing.cpp.o
-
-alignProcessing.i: alignProcessing.cpp.i
-
-.PHONY : alignProcessing.i
-
-# target to preprocess a source file
-alignProcessing.cpp.i:
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/alignProcessing.cpp.i
-.PHONY : alignProcessing.cpp.i
-
-alignProcessing.s: alignProcessing.cpp.s
-
-.PHONY : alignProcessing.s
-
-# target to generate assembly for a file
-alignProcessing.cpp.s:
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/alignProcessing.cpp.s
-.PHONY : alignProcessing.cpp.s
-
-entropy.o: entropy.cpp.o
-
-.PHONY : entropy.o
+.PHONY : alignTarget.o
 
 # target to build an object file
-entropy.cpp.o:
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/entropy.cpp.o
-.PHONY : entropy.cpp.o
+alignTarget.cpp.o:
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/alignTarget.cpp.o
+.PHONY : alignTarget.cpp.o
 
-entropy.i: entropy.cpp.i
+alignTarget.i: alignTarget.cpp.i
 
-.PHONY : entropy.i
+.PHONY : alignTarget.i
 
 # target to preprocess a source file
-entropy.cpp.i:
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/entropy.cpp.i
-.PHONY : entropy.cpp.i
+alignTarget.cpp.i:
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/alignTarget.cpp.i
+.PHONY : alignTarget.cpp.i
 
-entropy.s: entropy.cpp.s
+alignTarget.s: alignTarget.cpp.s
 
-.PHONY : entropy.s
+.PHONY : alignTarget.s
 
 # target to generate assembly for a file
-entropy.cpp.s:
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/entropy.cpp.s
-.PHONY : entropy.cpp.s
+alignTarget.cpp.s:
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/alignTarget.cpp.s
+.PHONY : alignTarget.cpp.s
+
+bin.o: bin.cpp.o
+
+.PHONY : bin.o
+
+# target to build an object file
+bin.cpp.o:
+	$(MAKE) -f CMakeFiles/Bin.dir/build.make CMakeFiles/Bin.dir/bin.cpp.o
+.PHONY : bin.cpp.o
+
+bin.i: bin.cpp.i
+
+.PHONY : bin.i
+
+# target to preprocess a source file
+bin.cpp.i:
+	$(MAKE) -f CMakeFiles/Bin.dir/build.make CMakeFiles/Bin.dir/bin.cpp.i
+.PHONY : bin.cpp.i
+
+bin.s: bin.cpp.s
+
+.PHONY : bin.s
+
+# target to generate assembly for a file
+bin.cpp.s:
+	$(MAKE) -f CMakeFiles/Bin.dir/build.make CMakeFiles/Bin.dir/bin.cpp.s
+.PHONY : bin.cpp.s
+
+binsegmentation.o: binsegmentation.cpp.o
+
+.PHONY : binsegmentation.o
+
+# target to build an object file
+binsegmentation.cpp.o:
+	$(MAKE) -f CMakeFiles/Bin.dir/build.make CMakeFiles/Bin.dir/binsegmentation.cpp.o
+.PHONY : binsegmentation.cpp.o
+
+binsegmentation.i: binsegmentation.cpp.i
+
+.PHONY : binsegmentation.i
+
+# target to preprocess a source file
+binsegmentation.cpp.i:
+	$(MAKE) -f CMakeFiles/Bin.dir/build.make CMakeFiles/Bin.dir/binsegmentation.cpp.i
+.PHONY : binsegmentation.cpp.i
+
+binsegmentation.s: binsegmentation.cpp.s
+
+.PHONY : binsegmentation.s
+
+# target to generate assembly for a file
+binsegmentation.cpp.s:
+	$(MAKE) -f CMakeFiles/Bin.dir/build.make CMakeFiles/Bin.dir/binsegmentation.cpp.s
+.PHONY : binsegmentation.cpp.s
+
+entropyOut.o: entropyOut.cpp.o
+
+.PHONY : entropyOut.o
+
+# target to build an object file
+entropyOut.cpp.o:
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/entropyOut.cpp.o
+	$(MAKE) -f CMakeFiles/Bin.dir/build.make CMakeFiles/Bin.dir/entropyOut.cpp.o
+.PHONY : entropyOut.cpp.o
+
+entropyOut.i: entropyOut.cpp.i
+
+.PHONY : entropyOut.i
+
+# target to preprocess a source file
+entropyOut.cpp.i:
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/entropyOut.cpp.i
+	$(MAKE) -f CMakeFiles/Bin.dir/build.make CMakeFiles/Bin.dir/entropyOut.cpp.i
+.PHONY : entropyOut.cpp.i
+
+entropyOut.s: entropyOut.cpp.s
+
+.PHONY : entropyOut.s
+
+# target to generate assembly for a file
+entropyOut.cpp.s:
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/entropyOut.cpp.s
+	$(MAKE) -f CMakeFiles/Bin.dir/build.make CMakeFiles/Bin.dir/entropyOut.cpp.s
+.PHONY : entropyOut.cpp.s
 
 findTarget.o: findTarget.cpp.o
 
@@ -223,7 +266,7 @@ findTarget.o: findTarget.cpp.o
 
 # target to build an object file
 findTarget.cpp.o:
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/findTarget.cpp.o
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/findTarget.cpp.o
 .PHONY : findTarget.cpp.o
 
 findTarget.i: findTarget.cpp.i
@@ -232,7 +275,7 @@ findTarget.i: findTarget.cpp.i
 
 # target to preprocess a source file
 findTarget.cpp.i:
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/findTarget.cpp.i
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/findTarget.cpp.i
 .PHONY : findTarget.cpp.i
 
 findTarget.s: findTarget.cpp.s
@@ -241,7 +284,7 @@ findTarget.s: findTarget.cpp.s
 
 # target to generate assembly for a file
 findTarget.cpp.s:
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/findTarget.cpp.s
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/findTarget.cpp.s
 .PHONY : findTarget.cpp.s
 
 model.o: model.cpp.o
@@ -271,32 +314,62 @@ model.cpp.s:
 	$(MAKE) -f CMakeFiles/Model.dir/build.make CMakeFiles/Model.dir/model.cpp.s
 .PHONY : model.cpp.s
 
-pointpose.o: pointpose.cpp.o
+pointposeOut.o: pointposeOut.cpp.o
 
-.PHONY : pointpose.o
+.PHONY : pointposeOut.o
 
 # target to build an object file
-pointpose.cpp.o:
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/pointpose.cpp.o
-.PHONY : pointpose.cpp.o
+pointposeOut.cpp.o:
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/pointposeOut.cpp.o
+	$(MAKE) -f CMakeFiles/Bin.dir/build.make CMakeFiles/Bin.dir/pointposeOut.cpp.o
+.PHONY : pointposeOut.cpp.o
 
-pointpose.i: pointpose.cpp.i
+pointposeOut.i: pointposeOut.cpp.i
 
-.PHONY : pointpose.i
+.PHONY : pointposeOut.i
 
 # target to preprocess a source file
-pointpose.cpp.i:
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/pointpose.cpp.i
-.PHONY : pointpose.cpp.i
+pointposeOut.cpp.i:
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/pointposeOut.cpp.i
+	$(MAKE) -f CMakeFiles/Bin.dir/build.make CMakeFiles/Bin.dir/pointposeOut.cpp.i
+.PHONY : pointposeOut.cpp.i
 
-pointpose.s: pointpose.cpp.s
+pointposeOut.s: pointposeOut.cpp.s
 
-.PHONY : pointpose.s
+.PHONY : pointposeOut.s
 
 # target to generate assembly for a file
-pointpose.cpp.s:
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/pointpose.cpp.s
-.PHONY : pointpose.cpp.s
+pointposeOut.cpp.s:
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/pointposeOut.cpp.s
+	$(MAKE) -f CMakeFiles/Bin.dir/build.make CMakeFiles/Bin.dir/pointposeOut.cpp.s
+.PHONY : pointposeOut.cpp.s
+
+washing_machine.o: washing_machine.cpp.o
+
+.PHONY : washing_machine.o
+
+# target to build an object file
+washing_machine.cpp.o:
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/washing_machine.cpp.o
+.PHONY : washing_machine.cpp.o
+
+washing_machine.i: washing_machine.cpp.i
+
+.PHONY : washing_machine.i
+
+# target to preprocess a source file
+washing_machine.cpp.i:
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/washing_machine.cpp.i
+.PHONY : washing_machine.cpp.i
+
+washing_machine.s: washing_machine.cpp.s
+
+.PHONY : washing_machine.s
+
+# target to generate assembly for a file
+washing_machine.cpp.s:
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/washing_machine.cpp.s
+.PHONY : washing_machine.cpp.s
 
 # Help Target
 help:
@@ -304,28 +377,35 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... Align"
 	@echo "... Model"
-	@echo "... align.o"
-	@echo "... align.i"
-	@echo "... align.s"
-	@echo "... alignProcessing.o"
-	@echo "... alignProcessing.i"
-	@echo "... alignProcessing.s"
-	@echo "... entropy.o"
-	@echo "... entropy.i"
-	@echo "... entropy.s"
+	@echo "... rebuild_cache"
+	@echo "... WashingMachine"
+	@echo "... Bin"
+	@echo "... alignTarget.o"
+	@echo "... alignTarget.i"
+	@echo "... alignTarget.s"
+	@echo "... bin.o"
+	@echo "... bin.i"
+	@echo "... bin.s"
+	@echo "... binsegmentation.o"
+	@echo "... binsegmentation.i"
+	@echo "... binsegmentation.s"
+	@echo "... entropyOut.o"
+	@echo "... entropyOut.i"
+	@echo "... entropyOut.s"
 	@echo "... findTarget.o"
 	@echo "... findTarget.i"
 	@echo "... findTarget.s"
 	@echo "... model.o"
 	@echo "... model.i"
 	@echo "... model.s"
-	@echo "... pointpose.o"
-	@echo "... pointpose.i"
-	@echo "... pointpose.s"
+	@echo "... pointposeOut.o"
+	@echo "... pointposeOut.i"
+	@echo "... pointposeOut.s"
+	@echo "... washing_machine.o"
+	@echo "... washing_machine.i"
+	@echo "... washing_machine.s"
 .PHONY : help
 
 

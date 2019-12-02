@@ -115,6 +115,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/Align.dir/DependInfo.cmake"
   "CMakeFiles/Model.dir/DependInfo.cmake"
+  "CMakeFiles/WashingMachine.dir/DependInfo.cmake"
+  "CMakeFiles/Bin.dir/DependInfo.cmake"
   )

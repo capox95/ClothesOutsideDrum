@@ -60,50 +60,13 @@ CMAKE_SOURCE_DIR = /home/alessio/dev/Clothes_Outside
 CMAKE_BINARY_DIR = /home/alessio/dev/Clothes_Outside/build
 
 #=============================================================================
-# Target rules for target CMakeFiles/Align.dir
-
-# All Build rule for target.
-CMakeFiles/Align.dir/all:
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/depend
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alessio/dev/Clothes_Outside/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target Align"
-.PHONY : CMakeFiles/Align.dir/all
-
-# Include target in all.
-all: CMakeFiles/Align.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/Align.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alessio/dev/Clothes_Outside/build/CMakeFiles 6
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Align.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alessio/dev/Clothes_Outside/build/CMakeFiles 0
-.PHONY : CMakeFiles/Align.dir/rule
-
-# Convenience name for target.
-Align: CMakeFiles/Align.dir/rule
-
-.PHONY : Align
-
-# clean rule for target.
-CMakeFiles/Align.dir/clean:
-	$(MAKE) -f CMakeFiles/Align.dir/build.make CMakeFiles/Align.dir/clean
-.PHONY : CMakeFiles/Align.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/Align.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
 # Target rules for target CMakeFiles/Model.dir
 
 # All Build rule for target.
 CMakeFiles/Model.dir/all:
 	$(MAKE) -f CMakeFiles/Model.dir/build.make CMakeFiles/Model.dir/depend
 	$(MAKE) -f CMakeFiles/Model.dir/build.make CMakeFiles/Model.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alessio/dev/Clothes_Outside/build/CMakeFiles --progress-num=7,8 "Built target Model"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alessio/dev/Clothes_Outside/build/CMakeFiles --progress-num=6,7 "Built target Model"
 .PHONY : CMakeFiles/Model.dir/all
 
 # Include target in all.
@@ -130,6 +93,80 @@ CMakeFiles/Model.dir/clean:
 
 # clean rule for target.
 clean: CMakeFiles/Model.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/WashingMachine.dir
+
+# All Build rule for target.
+CMakeFiles/WashingMachine.dir/all:
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/depend
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alessio/dev/Clothes_Outside/build/CMakeFiles --progress-num=8,9,10,11,12,13 "Built target WashingMachine"
+.PHONY : CMakeFiles/WashingMachine.dir/all
+
+# Include target in all.
+all: CMakeFiles/WashingMachine.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/WashingMachine.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alessio/dev/Clothes_Outside/build/CMakeFiles 6
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/WashingMachine.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alessio/dev/Clothes_Outside/build/CMakeFiles 0
+.PHONY : CMakeFiles/WashingMachine.dir/rule
+
+# Convenience name for target.
+WashingMachine: CMakeFiles/WashingMachine.dir/rule
+
+.PHONY : WashingMachine
+
+# clean rule for target.
+CMakeFiles/WashingMachine.dir/clean:
+	$(MAKE) -f CMakeFiles/WashingMachine.dir/build.make CMakeFiles/WashingMachine.dir/clean
+.PHONY : CMakeFiles/WashingMachine.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/WashingMachine.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/Bin.dir
+
+# All Build rule for target.
+CMakeFiles/Bin.dir/all:
+	$(MAKE) -f CMakeFiles/Bin.dir/build.make CMakeFiles/Bin.dir/depend
+	$(MAKE) -f CMakeFiles/Bin.dir/build.make CMakeFiles/Bin.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alessio/dev/Clothes_Outside/build/CMakeFiles --progress-num=1,2,3,4,5 "Built target Bin"
+.PHONY : CMakeFiles/Bin.dir/all
+
+# Include target in all.
+all: CMakeFiles/Bin.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/Bin.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alessio/dev/Clothes_Outside/build/CMakeFiles 5
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Bin.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alessio/dev/Clothes_Outside/build/CMakeFiles 0
+.PHONY : CMakeFiles/Bin.dir/rule
+
+# Convenience name for target.
+Bin: CMakeFiles/Bin.dir/rule
+
+.PHONY : Bin
+
+# clean rule for target.
+CMakeFiles/Bin.dir/clean:
+	$(MAKE) -f CMakeFiles/Bin.dir/build.make CMakeFiles/Bin.dir/clean
+.PHONY : CMakeFiles/Bin.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/Bin.dir/clean
 
 .PHONY : clean
 
