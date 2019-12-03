@@ -9,7 +9,7 @@
 
 #include <pcl/visualization/cloud_viewer.h>
 
-#include "pointposeOut.h"
+#include "../include/pointposeOut.h"
 
 void PointPose::setInputVectorClouds(std::vector<pcl::PointCloud<pcl::PointXYZ>::Ptr> &clouds) { m_clouds_vector = clouds; }
 
@@ -94,7 +94,8 @@ bool PointPose::computeGraspPoint(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud,
     if (distance < 0)
         distance = -distance;
 
-    std::cout << "margin for grasp: " << distance << std::endl;
+    margin = distance;
+    std::cout << "margin for grasp: " << margin << std::endl;
 
     return true;
 }
@@ -159,7 +160,7 @@ void PointPose::visualizeCloudGrasp(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &clou
         viz2.addArrow(m_cfp_viz[i].x, m_cfp_viz[i].o, 1.0f, 0.0f, 0.0f, false, "x_axis" + std::to_string(i));
         viz2.addArrow(m_cfp_viz[i].y, m_cfp_viz[i].o, 0.0f, 1.0f, 0.0f, false, "y_axis" + std::to_string(i));
         viz2.addArrow(m_cfp_viz[i].z, m_cfp_viz[i].o, 0.0f, 0.0f, 1.0f, false, "z_axis" + std::to_string(i));
-        viz2.addText3D("T" + std::to_string(i), m_cfp_viz[i].o, 0.01, 1.0, 0.0, 0., "Text" + std::to_string(i));
+        //viz2.addText3D("T" + std::to_string(i), m_cfp_viz[i].o, 0.01, 1.0, 0.0, 0., "Text" + std::to_string(i));
     }
 }
 

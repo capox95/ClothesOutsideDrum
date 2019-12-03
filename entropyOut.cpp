@@ -211,7 +211,6 @@ void EntropyFilter::visualizeAll(bool flag)
 }
 // -----------------------------------------------------------------------------------------------------------------------
 
-
 void EntropyFilter::downsample(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud_in, float leaf_size,
                                pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud_out)
 {
@@ -767,7 +766,7 @@ void EntropyFilter::alternativeConnectedComponets(pcl::PointCloud<pcl::PointXYZI
             extract.filter(*cloud_temp);
 
             pcl::copyPointCloud(*cloud_temp, *cloud_temp2);
-            if (inliers->indices.size() > 20)
+            if (inliers->indices.size() > 20) // 20
             {
                 cloud_clusters.push_back(cloud_temp2);
                 std::cout << "cluster number " << j << ", size: " << cloud_temp2->size() << std::endl;
