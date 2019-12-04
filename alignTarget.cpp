@@ -271,13 +271,13 @@ PointCloudIntT::Ptr Processing::convexCrop(PointCloudT::Ptr obj, PointCloudIntT:
     std::cout << "cloud points: " << cloud->points.size() << std::endl;
 
     pcl::compute3DCentroid(*object_result_, centroid_);
-    p11.getVector4fMap() = p1.getVector4fMap() + 2 * (centroid_ - p1.getVector4fMap());
-    p22.getVector4fMap() = p2.getVector4fMap() + 2 * (centroid_ - p2.getVector4fMap());
+    P11_.getVector4fMap() = p1.getVector4fMap() + 2 * (centroid_ - p1.getVector4fMap());
+    P22_.getVector4fMap() = p2.getVector4fMap() + 2 * (centroid_ - p2.getVector4fMap());
 
     pcl::PointCloud<pcl::PointXYZ>::Ptr vertices1(new pcl::PointCloud<pcl::PointXYZ>);
     vertices1->points.push_back(p1);
     vertices1->points.push_back(p2);
-    vertices1->points.push_back(p11);
+    vertices1->points.push_back(P11_);
     pcl::PointCloud<pcl::PointXYZ>::Ptr vertices1_updated(new pcl::PointCloud<pcl::PointXYZ>);
     updateVerticesCloud(vertices1, vertices1_updated, plane);
     PointCloudIntT::Ptr hull1(new PointCloudIntT);
@@ -286,7 +286,7 @@ PointCloudIntT::Ptr Processing::convexCrop(PointCloudT::Ptr obj, PointCloudIntT:
     pcl::PointCloud<pcl::PointXYZ>::Ptr vertices2(new pcl::PointCloud<pcl::PointXYZ>);
     vertices2->points.push_back(p1);
     vertices2->points.push_back(p2);
-    vertices2->points.push_back(p22);
+    vertices2->points.push_back(P22_);
     pcl::PointCloud<pcl::PointXYZ>::Ptr vertices2_updated(new pcl::PointCloud<pcl::PointXYZ>);
     updateVerticesCloud(vertices2, vertices2_updated, plane);
     PointCloudIntT::Ptr hull2(new PointCloudIntT);
@@ -314,34 +314,54 @@ void Processing::visualize()
     //
     pcl::visualization::PCLVisualizer viz("Visualizer");
     //viz.addCoordinateSystem(0.1, "coordinate");
-    viz.setBackgroundColor(0.0, 0.0, 0.5);
+    viz.setBackgroundColor(1.0, 1.0, 1.0);
 
     viz.addPointCloud<PointNT>(scene_, "scene");
-    viz.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_COLOR, 0.0f, 1.0f, 0.0f, "scene");
+    viz.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_COLOR, 0.0f, 0.7f, 0.0f, "scene");
     viz.addPointCloud<PointNT>(object_result_, "object_result");
-    viz.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_COLOR, 1.0f, 0.0f, 0.0f, "object_result");
+    viz.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_COLOR, 0.7f, 0.0f, 0.0f, "object_result");
 
     pcl::visualization::PCLVisualizer vizScene("Scene Map");
-    vizScene.setBackgroundColor(0.0, 0.0, 0.5);
+    vizScene.setBackgroundColor(1.0, 1.0, 1.0);
     //vizScene.addPointCloud<PointT>(diff_scene, "diff_scene");
     pcl::visualization::PointCloudColorHandlerGenericField<pcl::PointXYZI> intensity_distribution(scene_map_, "intensity");
     vizScene.addPointCloud<pcl::PointXYZI>(scene_map_, intensity_distribution, "diff_scene");
 
     /*
+
+    */
+    /*
+    pcl::visualization::PCLVisualizer vizProj("vizHull");
+    vizProj.setBackgroundColor(1.0, 1.0, 1.0);
+    vizProj.addPointCloud<PointNT>(object_result_, "object_result_");
+    vizProj.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_COLOR, 0.7f, 0.0f, 0.0f, "object_result_");
+    vizProj.addPointCloud<PointNT>(cloud_hull_tmp, "cloud_hull_");
+    vizProj.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_COLOR, 0.0f, 1.0f, 1.0f, "cloud_hull_");
+    vizProj.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 8, "cloud_hull_");
+
+    vizProj.addSphere(P1_, 0.01, 0.0, 1.0, 0.0, "p1");
+    vizProj.addText3D("P1", P1_, 0.02, 0.0, 0.7, 0.0, "p1_text");
+    vizProj.addSphere(P2_, 0.01, 0.0, 1.0, 0.0, "p2");
+    vizProj.addText3D("P2", P2_, 0.02, 0.0, 0.7, 0.0, "p2_text");
+
+    vizProj.addSphere(P11_, 0.01, 0.0, 1.0, 0.0, "p11");
+    vizProj.addText3D("P1'", P11_, 0.02, 0.0, 0.7, 0.0, "p11_text");
+
+    vizProj.addSphere(P22_, 0.01, 0.0, 1.0, 0.0, "p22");
+    vizProj.addText3D("P2'", P22_, 0.02, 0.0, 0.7, 0.0, "p22_text");
+
     pcl::PointXYZ centroidPoint;
     centroidPoint.getVector4fMap() = centroid_;
-    vizScene.addSphere(centroidPoint, 0.01, 0.0, 1.0, 0.0, "centroid");
+    vizProj.addSphere(centroidPoint, 0.01, 0.0, 1.0, 0.0, "centroid");
+    vizProj.addText3D("C", centroidPoint, 0.02, 0.0, 0.7, 0.0, "c_text");
     */
-    vizScene.addPointCloud<PointNT>(cloud_hull_, "cloud_hull_");
-    vizScene.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_COLOR, 0.0f, 1.0f, 1.0f, "cloud_hull_");
-    vizScene.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 8, "cloud_hull_");
-
-    vizScene.addLine(lines_[0], "line0", 0);
-    vizScene.addLine(lines_[1], "line1", 0);
-    vizScene.addLine(lines_[2], "line2", 0);
+    //vizScene.addLine(lines_[0], "line0", 0);
+    //vizScene.addLine(lines_[1], "line1", 0);
+    //vizScene.addLine(lines_[2], "line2", 0);
 
     pcl::visualization::PCLVisualizer vizHull("vizHull");
-    vizHull.setBackgroundColor(0.0, 0.0, 0.5);
-    vizHull.addPointCloud<PointT>(combined_hulls_, "combined_hulls_");
-    vizHull.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_COLOR, 1.0f, 1.0f, 0.0f, "combined_hulls_");
+    vizHull.setBackgroundColor(1.0, 1.0, 1.0);
+    //vizHull.addPointCloud<PointT>(combined_hulls_, "combined_hulls_");
+    pcl::visualization::PointCloudColorHandlerGenericField<pcl::PointXYZI> intensity_distributionC(combined_hulls_, "intensity");
+    vizHull.addPointCloud<pcl::PointXYZI>(combined_hulls_, intensity_distributionC, "combined_hulls_");
 }

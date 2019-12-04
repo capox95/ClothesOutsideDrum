@@ -18,13 +18,14 @@ private:
     PointCloudT::Ptr object_result_;
     PointCloudIntT::Ptr scene_map_, combined_hulls_;
     PointCloudT::Ptr cloud_hull_;
+
     pcl::PointCloud<pcl::PointXYZ>::Ptr vertices_;
 
     Eigen::Vector4f centroid_;
     std::vector<pcl::ModelCoefficients> lines_;
 
     pcl::PointXYZ P1_, P2_; // intersection points
-    pcl::PointXYZ p11, p22;
+    pcl::PointXYZ P11_, P22_;
 
 public:
     Processing() : plane_(new pcl::ModelCoefficients),
