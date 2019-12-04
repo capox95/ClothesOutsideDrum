@@ -9,7 +9,7 @@
 
 #include <pcl/visualization/cloud_viewer.h>
 
-#include "../include/pointposeOut.h"
+#include "pointposeOut.h"
 
 void PointPose::setInputVectorClouds(std::vector<pcl::PointCloud<pcl::PointXYZ>::Ptr> &clouds) { m_clouds_vector = clouds; }
 

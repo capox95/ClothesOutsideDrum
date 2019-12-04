@@ -18,6 +18,24 @@ typedef pcl::PointCloud<PointNT> PointCloudNT;
 
 int main(int argc, char **argv)
 {
+
+    PointCloudNT::Ptr source(new PointCloudNT);
+    // Get input object and scene
+    if (argc != 2)
+    {
+        pcl::console::print_error("Syntax is: %s object.pcd\n", argv[0]);
+        return (1);
+    }
+
+    // Load object and scene
+    pcl::console::print_highlight("Loading point clouds...\n");
+    if (pcl::io::loadPCDFile<PointNT>(argv[1], *source) < 0)
+    {
+        pcl::console::print_error("Error loading object/scene file!\n");
+        return (1);
+    }
+
+    /*
     // Point clouds
     PointCloudT::Ptr source(new PointCloudT);
 
@@ -35,7 +53,7 @@ int main(int argc, char **argv)
         pcl::console::print_error("Error loading object/scene file!\n");
         return (1);
     }
-
+    
     // Create the segmentation object for the planar model and set all the parameters
     pcl::SACSegmentation<PointT> seg;
     pcl::ModelCoefficients::Ptr coefficients_plane(new pcl::ModelCoefficients);
@@ -87,16 +105,24 @@ int main(int argc, char **argv)
     nestObj.setRadiusSearch(0.01);
     nestObj.setInputCloud(cloud_normals);
     nestObj.compute(*cloud_normals);
+    */
+
+    PointCloudT::Ptr cloud_filtered(new PointCloudT);
+    pcl::PassThrough<PointNT> pass;
+    pass.setInputCloud(source);
+    pass.setFilterFieldName("x");
+    pass.setFilterLimits(-0.1, 2);
+    //pass.setFilterLimitsNegative (true);
+    pass.filter(*source);
 
     pcl::visualization::PCLVisualizer viz("Visualizer");
     viz.addCoordinateSystem(0.1, "coordinate");
     viz.setBackgroundColor(0.0, 0.0, 0.5);
-    viz.addPointCloud<PointT>(source, "source");
-    viz.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_COLOR, 0.0f, 1.0f, 0.0f, "source");
-    viz.addPointCloud<PointNT>(cloud_normals, "cloud_plane");
+    viz.addPointCloud<PointNT>(source, "source");
+    //viz.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_COLOR, 0.0f, 1.0f, 0.0f, "source");
     viz.spin();
 
-    pcl::io::savePCDFileASCII("crop.pcd", *cloud_normals);
+    pcl::io::savePCDFileASCII("crop.pcd", *source);
 
     return (0);
 }
