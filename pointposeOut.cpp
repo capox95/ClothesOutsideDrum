@@ -74,28 +74,22 @@ bool PointPose::computeGraspPoint(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud,
     rotation.col(1) = eigenVectors.col(idx[1]);
     rotation.col(2) = eigenVectors.col(idx[2]);
 
-    //Eigen::Quaternion<float> quat(rotation);
-    //quat.normalize();
-
     m_trans = moveCentroid(centroid, cloud); //move centroid from projected cloud to original cloud_grasp
-                                             //m_rot = quat;
 
     //compute point for visualizing coordinate axes
     Eigen::Vector3f directionX, directionZ;
     getCoordinateFrame(m_trans, rotation, directionX, directionZ);
-
     transformation_matrix = computeTransformation(m_trans, directionX, directionZ);
 
     // compute margin for the grasp wrt plane
     Eigen::Vector3f n(m_plane->values[0], m_plane->values[1], m_plane->values[2]);
     float p = m_plane->values[3];
-    float distance = n.dot(m_trans) + p;
+    margin = n.dot(m_trans) + p;
 
-    if (distance < 0)
-        distance = -distance;
+    if (margin < 0)
+        margin = -margin;
 
-    margin = distance;
-    std::cout << "margin for grasp: " << margin << std::endl;
+    std::cout << " margin : " << margin << std::endl;
 
     return true;
 }

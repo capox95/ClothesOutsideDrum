@@ -83,7 +83,17 @@ int main(int argc, char **argv)
     std::vector<float> margin_values;
     int number = pp.compute(transformation_vector, margin_values);
 
+    // CHOICE OF THE POSE TO USE AMONG THE SET CALCULATED ------------------------------------
+    int max_id_margin = std::max_element(margin_values.begin(), margin_values.end()) - margin_values.begin();
+    Eigen::Affine3d matrix = transformation_vector[max_id_margin];
+    float margin = margin_values[max_id_margin];
+
+    std::cout << std::endl;
     pcl::console::print_highlight("Done...\n");
+
+    std::cout << "Transformation Matrxi: \n"
+              << matrix.matrix() << std::endl;
+    std::cout << "Margin available: " << margin << " meters" << std::endl;
 
     //time computation
     auto endE = std::chrono::steady_clock::now();
